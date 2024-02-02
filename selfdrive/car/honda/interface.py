@@ -46,6 +46,7 @@ class CarInterface(CarInterfaceBase):
       ret.pcmCruise = not ret.openpilotLongitudinalControl
       ret.customStockLongAvailable = True
     else:
+      ret.radarUnavailable = True
       ret.safetyConfigs = [get_safety_config(car.CarParams.SafetyModel.hondaNidec)]
       ret.enableGasInterceptor = 0x201 in fingerprint[0]
       ret.openpilotLongitudinalControl = True
