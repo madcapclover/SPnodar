@@ -24,7 +24,6 @@ class LateralPlanner:
     self.v_ego = MIN_SPEED
     self.l_lane_change_prob = 0.0
     self.r_lane_change_prob = 0.0
-    self.d_path_w_lines_xyz = np.zeros((TRAJECTORY_SIZE, 3))
 
     self.debug_mode = debug
 
@@ -78,9 +77,6 @@ class LateralPlanner:
     plan_sp_send.valid = sm.all_checks(service_list=['carState', 'controlsState', 'modelV2'])
 
     lateralPlanSPDEPRECATED = plan_sp_send.lateralPlanSPDEPRECATED
-    lateralPlanSPDEPRECATED.laneChangePrev = self.DH.prev_lane_change
-
-    lateralPlanSPDEPRECATED.dPathWLinesX = [float(x) for x in self.d_path_w_lines_xyz[:, 0]]
-    lateralPlanSPDEPRECATED.dPathWLinesY = [float(y) for y in self.d_path_w_lines_xyz[:, 1]]
+    lateralPlanSPDEPRECATED.laneChangePrevDEPRECATED = self.DH.prev_lane_change
 
     pm.send('lateralPlanSPDEPRECATED', plan_sp_send)
